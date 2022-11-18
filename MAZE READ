@@ -1,0 +1,60 @@
+String maze = "srsllblbsrllrsrllbsrllbrllrrllrlll";
+void setup() 
+{
+  Serial.begin(9600);
+  mazesolver();
+}
+
+void loop() 
+{
+
+
+
+}
+void mazesolver()
+{
+  String temp="";
+  int l = maze.indexOf('b');
+  while(l>-1)
+  {
+  temp=temp+maze.charAt(l-1)+maze.charAt(l)+maze.charAt(l+1);
+  rep(l,rpath(temp));
+  temp="";
+  l = maze.indexOf('b');
+  }
+  Serial.println(maze);
+}
+
+String rep(int l, char x)
+{
+  maze.remove(l - 1, 1);
+  maze.remove(l, 1);
+  maze.setCharAt(l - 1, x);
+
+  return maze;
+}
+
+
+char rpath(String s)
+{
+  if (s.equals("lbl"))
+    return 's';
+  else if (s.equals("lbs"))
+    return 'r';
+  else if (s.equals("lbr"))
+    return 'b';
+  else if (s.equals("sbl"))
+    return 'r';
+  else if (s.equals("sbs"))
+    return 'b';
+  else if (s.equals("sbr"))
+    return 'r';
+  else if (s.equals("rbl"))
+    return 'b';
+  else if (s.equals("rbs"))
+    return 'l';
+  else if (s.equals("rbr"))
+    return 's';
+  else 
+    return 'b';
+}
